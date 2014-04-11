@@ -43,8 +43,15 @@ describe Board do
 
   context "attributes" do
     it { expect(test_board).to respond_to(:puzzle ) }
+    it { expect(test_board).to respond_to(:solved?) }
     it { expect(test_board.puzzle.length).to eq(81) }
     it { expect(test_board.puzzle).to be_a(Array) }
     it { expect(test_board.puzzle.first).to be_a(Node) }
+  end
+
+  context "#solved?" do
+    it "should be true if the board is properly solved" do
+      expect(Board.new("1"*81).solved?).to be_false
+    end
   end
 end

@@ -21,8 +21,24 @@ end
 class Board
   attr_accessor :puzzle
 
-  def initialize(puzzle)
+  def initialize(string)
     @puzzle = []
-    puzzle.split('').each_with_index { |value, index| @puzzle << Node.new({ value: value, location: index }) }
+    string.split('').each_with_index { |value, index| @puzzle << Node.new({ value: value, location: index }) }
+    @rows = Board.set_rows
+    @columns = Board.set_columns
+    @cells = Board.set_cells
+  end
+
+  def solved?
+    [@rows, @columns, @cells].all? { |block| block.solved? }
+  end
+
+  def self.set_rows
+  end
+
+  def self.set_cells
+  end
+
+  def self.set_columns
   end
 end
