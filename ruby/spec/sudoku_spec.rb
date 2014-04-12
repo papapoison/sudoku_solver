@@ -2,7 +2,16 @@ require 'rspec'
 require_relative '../sudoku'
 
 describe Sudoku do
+  let(:param_board) { Board.new('1'*81) }
+  let(:test_game) { Sudoku.new(param_board) }
 
+  context "methods" do
+    it { expect(test_game).to respond_to(:solved?) }
+    it { expect(test_game).to respond_to(:solve!) }
+  end
+
+  context "#solved?" do
+  end
 end
 
 describe Node do
@@ -17,17 +26,17 @@ describe Node do
   end
 
   context "methods" do
-    it { expect(test_node).to respond_to(:solved?) }
+    it { expect(test_node).to respond_to(:empty?) }
   end
 
-  context "#solved?" do
-    it "should be true if the value is not zero" do
-      expect(test_node.solved?).to eq(true)
+  context "#empty?" do
+    it "should be false if the value is not zero" do
+      expect(test_node.empty?).to eq(false)
     end
 
-    it "should be false if the value is zero" do
+    it "should be true if the value is zero" do
       test_node.value = 0
-      expect(test_node.solved?).to eq(false)
+      expect(test_node.empty?).to eq(true)
     end
   end
 
@@ -43,15 +52,8 @@ describe Board do
 
   context "attributes" do
     it { expect(test_board).to respond_to(:puzzle ) }
-    it { expect(test_board).to respond_to(:solved?) }
     it { expect(test_board.puzzle.length).to eq(81) }
     it { expect(test_board.puzzle).to be_a(Array) }
     it { expect(test_board.puzzle.first).to be_a(Node) }
-  end
-
-  context "#solved?" do
-    it "should be true if the board is properly solved" do
-      expect(Board.new("1"*81).solved?).to be_false
-    end
   end
 end
