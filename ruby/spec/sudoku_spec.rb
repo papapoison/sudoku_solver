@@ -11,6 +11,14 @@ describe Sudoku do
   end
 
   context "#solved?" do
+    it "should return false if all rows, columns, and cells are not solved" do
+      expect(test_game.solved?).to eq(false)
+    end
+
+    it "should return true with a valid puzzle" do
+      real_puzzle = Sudoku.new('619238745274561398853947621486352179792614583531879264945723816328196457167485932')
+      expect(real_puzzle.solved?).to eq(true)
+    end
   end
 end
 

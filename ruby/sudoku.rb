@@ -11,10 +11,40 @@ class Sudoku
   end
 
   private
+  def get_rows
+    row_number = 0
+    rows = []
+    9.times do
+     rows << @board.group_by { |node| node.value / 9 == row_number }[true]
+     row_number += 1
+    end
+    rows
+  end
+
   def rows_solved?
   end
 
+  def get_columns
+    column_number = 0
+    columns = []
+    9.times do
+     columns << @board.group_by { |node| node.value % 9 == column_number }[true]
+     row_number += 1
+    end
+    columns
+  end
+
   def columns_solved?
+  end
+
+  def get_cells
+    cell_number = 0
+    cells = []
+    9.times do
+     cells << @board.group_by { |node| ((node.row_id / 3) * 3) + (node.column_id / 3) == cell_number }[true]
+     row_number += 1
+    end
+    cells
   end
 
   def cells_solved?
